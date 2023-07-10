@@ -209,23 +209,128 @@
                 <h5 class="modal-title" id="exampleModalLiveLabel">Modal Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body">
-                <p class="mb-0">Woohoo, you're reading this text in a modal!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn  btn-primary">Save changes</button>
-            </div>
+            <form action="{{ route('add.karyawan') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 text-center"> 
+                            <div class="d-flex justify-content-center">
+                                <img id="default" src="assets/images/user/no_img.jpg" class="img" style="height: auto; width:150px">
+                                <img id="previewImage" class="img" style="height: auto; width:150px; display:none;">
+                            </div>
+                            <div class="mt-2 mb-4 d-flex justify-content-center">
+                                <input type="file" class="form-control form-control-sm" style="width: 250px; height: 40px" name="image" accept="image/*" onchange="previewFile(event)">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center"> 
+                            <div class="mt-2 mb-4 d-flex justify-content-center">
+                                <label for="">Data Diri</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">Nama</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ $tk->name }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="address" class="col-sm-3 col-form-label">Alamat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" name="address" id="address" value="{{ $tk->address }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="dob" class="col-sm-3 col-form-label">DoB</label>
+                                <div class="col-sm-9">
+                                    <input type="date" name="dob" class="form-control form-control-sm" id="dob" value="{{ $tk->dob }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" name="email" class="form-control form-control-sm" id="email" value="{{ $tk->email }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone" class="col-sm-3 col-form-label">Phone</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" name="phone" id="phone" value="{{ $tk->phone }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                                <div class="col-sm-9">
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="">Please Select</option>
+                                        <option value="male" @if($tk->gender == 'male') selected @endif>Male</option>
+                                        <option value="female" @if($tk->gender == 'female') selected @endif>Female</option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center"> 
+                            <div class="mt-2 mb-4 d-flex justify-content-center">
+                                <label for="">Tanggungan</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">Anak</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ $tk->name }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">Lain-lain</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ $tk->name }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" class="form-control form-control-sm" name="id" value="{{ $tk->id }}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 {{-- Modal Karyawan --}}
-
     <!-- Required Js -->
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>
     <script src="assets/js/pcoded.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script>
+        function previewFile(event) {
+          var preview = document.getElementById('previewImage');
+          var defaultImage = document.getElementById('default');
+          var file = event.target.files[0];
+          var reader = new FileReader();
+        
+          reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            defaultImage.style.display = 'none';
+          }
+        
+          if (file && file.type.match('image.*')) {
+            reader.readAsDataURL(file);
+          } else {
+            preview.src = "";
+            preview.style.display = 'none';
+            defaultImage.style.display = 'block';
+          }
+        }
+        </script>
     <script>
         $(document).ready(function() {
         $('#editKaryawan').on('show.bs.modal', function(event) {

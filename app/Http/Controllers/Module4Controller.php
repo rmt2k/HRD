@@ -37,4 +37,7 @@ class Module4Controller extends Controller
         $editKaryawan->save();
         return redirect()->back()->with('success', 'Data karyawan berhasil diperbarui.');
     }
+    public function addKaryawan(Request $request){
+        dd($request->all());
+    }
 }

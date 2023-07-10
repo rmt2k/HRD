@@ -31,6 +31,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/dashboard',[Module2Controller::class,'index'])->name('dashboard');
     Route::get('/slip-gaji',[Module3Controller::class,'index'])->name('slip.gaji');
     Route::get('/karyawan',[Module4Controller::class,'index'])->name('tabel.karyawan');
-    Route::post('/karyawan',[Module4Controller::class,'editKaryawan'])->name('edit.karyawan');
+    Route::post('/karyawan/edit',[Module4Controller::class,'editKaryawan'])->name('edit.karyawan');
+    Route::post('/karyawan/add',[Module4Controller::class,'addKaryawan'])->name('add.karyawan');
 });
 Route::post('/logout', [Module1Controller::class, 'logout'])->name('logout');
