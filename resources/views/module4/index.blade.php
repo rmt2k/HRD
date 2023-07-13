@@ -103,7 +103,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="mt-2 mb-4 d-flex justify-content-center">
-                                                                    <input type="file" class="form-control form-control-sm" style="width: 250px" name="image">
+                                                                    <input type="file" class="form-control form-control-sm" style="width: 250px; height:40px" name="image">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12 text-center"> 
