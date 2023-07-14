@@ -97,7 +97,7 @@
                                                             <div class="col-sm-12 text-center"> 
                                                                 <div>
                                                                     @if ($tk->image > 0)
-                                                                    <img src="{{ 'assets/images/user/'.$person->image }}" style="height: auto; width:150px">
+                                                                    <img src="{{ 'assets/upload/image/avatar'.$person->image }}" style="height: auto; width:150px">
                                                                     @else
                                                                     <img src="{{ 'assets/images/user/no_img.jpg' }}" class="img-radius" style="height: auto; width:150px">
                                                                     @endif
